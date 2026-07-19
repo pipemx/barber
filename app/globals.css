@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — Dark Luxury / Gold
+   ============================================================ */
+@theme {
+  --color-ink: #0c0a09;          /* fondo base (no negro puro) */
+  --color-ink-soft: #141110;     /* fondo secciones alternas */
+  --color-surface: #1c1917;      /* cards */
+  --color-surface-2: #241f1c;    /* cards elevadas */
+  --color-line: #2e2925;         /* bordes */
+  --color-gold: #c9a55c;         /* acento principal */
+  --color-gold-bright: #e3c98a;  /* acento hover / highlights */
+  --color-gold-deep: #8a6d35;    /* acento profundo */
+  --color-cream: #faf7f0;        /* texto principal */
+  --color-stone-muted: #a8a29e;  /* texto secundario */
+  --color-whatsapp: #25d366;
+
+  --font-display: var(--font-bodoni), "Bodoni Moda", serif;
+  --font-sans: var(--font-jost), "Jost", sans-serif;
+
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-glow-gold: 0 0 40px rgba(201, 165, 92, 0.25);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Scrollbar sutil acorde al tema */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold-deep); }
+
+/* Textura de grano sutil para profundidad cinematográfica */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(20, 17, 16, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(201, 165, 92, 0.12);
+}
+
+/* Texto con gradiente dorado */
+.text-gold-gradient {
+  background: linear-gradient(120deg, #e3c98a 0%, #c9a55c 45%, #8a6d35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Línea decorativa dorada */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Glow ambiental animado */
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-30px, 25px) scale(0.95); }
+}
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: drift 18s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.btn-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    var(--color-gold) 0%,
+    var(--color-gold-bright) 25%,
+    var(--color-gold) 50%
+  );
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ambient-glow, .btn-shimmer { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
