@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { brand } from "@/lib/config";
+import { useTheme } from "@/lib/theme";
 
 const links = [
   { href: "#servicios", label: "Servicios" },
@@ -16,6 +17,7 @@ const links = [
 export function Navbar({ onBook }: { onBook: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -54,6 +56,37 @@ export function Navbar({ onBook }: { onBook: () => void }) {
         </ul>
 
         <div className="flex items-center gap-3">
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            className="theme-toggle"
+            aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === "dark" ? (
+                <motion.span
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <Sun className="w-4 h-4" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="moon"
+                  initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <Moon className="w-4 h-4" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
           <button
             onClick={onBook}
             className="hidden sm:inline-flex btn-shimmer text-ink text-xs md:text-sm font-semibold uppercase tracking-wider rounded-full px-5 md:px-6 py-2.5 md:py-3 cursor-pointer transition-shadow hover:shadow-glow-gold"

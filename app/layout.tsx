@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 import { brand, hours } from "@/lib/config";
+import { ThemeProvider } from "@/lib/theme";
 
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
@@ -69,13 +70,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${bodoni.variable} ${jost.variable} h-full antialiased`}>
+    <html
+      lang="es"
+      data-theme="dark"
+      className={`${bodoni.variable} ${jost.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

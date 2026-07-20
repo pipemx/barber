@@ -6,11 +6,13 @@ import Image from "next/image";
 import { useRef } from "react";
 import { brand } from "@/lib/config";
 import { waLink, waMessages } from "@/lib/whatsapp";
+import { useTheme } from "@/lib/theme";
 import { GoldButton, GhostButton, WhatsAppIcon } from "./ui";
 
 const luxe = [0.16, 1, 0.3, 1] as const;
 
 export function Hero({ onBook }: { onBook: () => void }) {
+  const { theme } = useTheme();
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -49,8 +51,16 @@ export function Hero({ onBook }: { onBook: () => void }) {
         className="ambient-glow w-[400px] h-[400px] bg-gold-deep/20 bottom-0 -right-32"
         style={{ animationDelay: "-9s" }}
       />
-      {/* Viñeta oscura para legibilidad del texto sobre la foto */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(12,10,9,0.55)_0%,rgba(12,10,9,0.92)_100%)]" />
+      {/* Viñeta para legibilidad del texto sobre la foto */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            theme === "dark"
+              ? "radial-gradient(ellipse at center, rgba(12,10,9,0.55) 0%, rgba(12,10,9,0.92) 100%)"
+              : "radial-gradient(ellipse at center, rgba(247,244,239,0.6) 0%, rgba(247,244,239,0.88) 100%)",
+        }}
+      />
 
       <motion.div
         style={reduce ? undefined : { y, opacity }}

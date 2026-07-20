@@ -50,7 +50,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 
 export function Faq() {
   return (
-    <section className="relative py-24 md:py-32 px-5 md:px-8">
+    <section className="relative py-24 md:py-32 px-5 md:px-8 section-glow">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
           kicker="Preguntas frecuentes"

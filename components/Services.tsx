@@ -66,7 +66,7 @@ function ServiceCard({
 
 export function Services({ onBook }: { onBook: (serviceId: string) => void }) {
   return (
-    <section id="servicios" className="relative py-24 md:py-32 px-5 md:px-8">
+    <section id="servicios" className="relative py-24 md:py-32 px-5 md:px-8 section-glow">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           kicker="Servicios"

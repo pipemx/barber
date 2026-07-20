@@ -28,7 +28,7 @@ const steps = [
 
 export function Experience() {
   return (
-    <section id="experiencia" className="relative py-24 md:py-32 px-5 md:px-8">
+    <section id="experiencia" className="relative py-24 md:py-32 px-5 md:px-8 section-glow">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           kicker="La experiencia"

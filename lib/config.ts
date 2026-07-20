@@ -13,6 +13,8 @@ export const brand = {
   phone: "+52 33 0000 0000",
   address: "Av. Providencia 1234, Col. Providencia, Guadalajara, Jal.",
   mapsUrl: "https://maps.google.com/?q=Av.+Providencia+1234+Guadalajara",
+  mapsEmbed:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.!2d-103.39!3d20.67!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sProvidencia%2C+Guadalajara!5e0!3m2!1ses!2smx!4v1",
   instagram: "https://instagram.com/imperialbarberclub",
   tiktok: "https://tiktok.com/@imperialbarberclub",
   rating: 4.9,

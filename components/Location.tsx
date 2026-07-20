@@ -7,8 +7,8 @@ import { GhostButton, Reveal, SectionHeading } from "./ui";
 
 export function Location() {
   return (
-    <section id="ubicacion" className="relative py-24 md:py-32 px-5 md:px-8 bg-ink-soft border-t border-line">
-      <div className="mx-auto max-w-6xl">
+    <section id="ubicacion" className="relative py-24 md:py-32 px-5 md:px-8 bg-ink-soft border-t border-line section-glow">
+      <div className="mx-auto max-w-6xl relative z-[1]">
         <SectionHeading
           kicker="Visítanos"
           title={
@@ -20,33 +20,38 @@ export function Location() {
         />
         <div className="grid lg:grid-cols-2 gap-8">
           <Reveal>
-            <a
-              href={brand.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative block h-72 lg:h-full min-h-72 rounded-2xl overflow-hidden border border-line hover:border-gold/40 transition-colors duration-300"
-              aria-label="Ver interior del local y abrir ubicación en Google Maps"
-            >
-              <Image
-                src="/images/shop-interior.jpg"
-                alt="Interior del local"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 flex items-center gap-3">
-                <span className="w-12 h-12 rounded-full bg-gold/15 border border-gold/40 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <MapPin className="w-6 h-6 text-gold" aria-hidden="true" />
+            <div className="flex flex-col gap-4 h-full">
+              {/* Google Maps embed */}
+              <div className="maps-embed h-64 lg:h-full min-h-64 flex-1">
+                <iframe
+                  src={brand.mapsEmbed}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`Ubicación de ${brand.name} ${brand.tagline} en Google Maps`}
+                />
+              </div>
+              {/* Link to open in Google Maps app */}
+              <a
+                href={brand.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-4 bg-surface border border-line rounded-xl hover:border-gold/40 transition-colors duration-300"
+              >
+                <span className="w-10 h-10 rounded-full bg-gold/15 border border-gold/40 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-gold" aria-hidden="true" />
                 </span>
-                <div>
-                  <p className="text-sm text-cream font-medium">{brand.address}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-cream font-medium truncate">{brand.address}</p>
                   <p className="text-xs text-gold uppercase tracking-widest mt-0.5">
-                    Toca para abrir en Google Maps
+                    Abrir en Google Maps
                   </p>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={0.15}>
